@@ -338,13 +338,16 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/BrokenVector/LowPolyFencePack/Scripts/DoorController.cs"
 "Assets/BrokenVector/LowPolyFencePack/Scripts/DoorToggle.cs"
-"Assets/ClickToMove.cs"
-"Assets/EnemyMovement.cs"
-"Assets/InputTest.cs"
+"Assets/Health.cs"
 "Assets/PlayerControls.cs"
+"Assets/Scripts/ClickToMove.cs"
+"Assets/Scripts/EnemyMovement.cs"
+"Assets/Scripts/InputTest.cs"
 "Assets/Scripts/MainMenu.cs"
-"Assets/testMouseLook.cs"
-"Assets/TestMovementGameDev.cs"
+"Assets/Scripts/OptionsScreen.cs"
+"Assets/Scripts/testEnemyMovement.cs"
+"Assets/Scripts/testMouseLook.cs"
+"Assets/Scripts/TestMovementGameDev.cs"
 -langversion:9.0
 
 /deterministic
