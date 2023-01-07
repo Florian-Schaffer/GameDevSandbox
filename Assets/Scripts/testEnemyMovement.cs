@@ -7,10 +7,6 @@ public class testEnemyMovement : MonoBehaviour
     
     
     
-    
-    
-    
-    
     public CharacterController controller;
     public Transform spawnPos;
 
@@ -25,6 +21,7 @@ public class testEnemyMovement : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
+    public Transform target;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +34,7 @@ public class testEnemyMovement : MonoBehaviour
     {
         
         var navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        var player = GameObject.FindWithTag("Player");
+        var player = GameObject.FindWithTag("PlayerBody");
         var distance = Vector3.Distance(transform.position, player.transform.position);
         
         
@@ -51,18 +48,31 @@ public class testEnemyMovement : MonoBehaviour
         }
 
 
-        Vector3 randomMove = transform.right * Random.Range(-10.0f, 10.0f) + transform.forward * Random.Range(-10.0f,10.0f);
-         
+        //Random.Range(-10.0f, 10.0f);
+        float randomX = 0;
+        float randomZ = 0;
+        Vector3 randomMove = transform.right * randomX + transform.forward * randomZ;
+
+        float x = 0;
+        float z = 1.0f;
+        Vector3 targetMove = transform.right * x + transform.forward * z;
+
+        //gravity 
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
 
 
-
+        //ground movement and attacking
         if (distance > 20)
         {
-            controller.Move(randomMove * speed * Time.deltaTime);
+            transform.LookAt(target);
+            controller.Move(targetMove * speed * Time.deltaTime);
         } 
         else if (distance > 10)
         {
+            
             navMeshAgent.SetDestination(player.transform.position);
+            controller.Move(targetMove * speed * Time.deltaTime);
         }
         else if (distance > 3.0f)
         {
@@ -85,12 +95,14 @@ public class testEnemyMovement : MonoBehaviour
 
         void OnCollisionEnter(Collision collision)
         {
-            Debug.Log(collision.gameObject.name);
+            
 
-            if(collision.gameObject.tag == "Player")
+            if(collision.gameObject.tag == "PlayerBody")
             {
                 var playerHealth = collision.gameObject.GetComponent<Health>();
                 playerHealth.Adjust(-5);
+                Debug.Log(collision.gameObject.GetComponent<Health>());
+                Debug.Log(collision.gameObject.name);
             }
 
         }

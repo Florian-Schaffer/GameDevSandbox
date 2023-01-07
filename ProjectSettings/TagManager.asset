@@ -6,6 +6,8 @@ TagManager:
   tags:
   - WalkableTerrain
   - Enemy
+  - PlayerBody
+  - EnemyBody
   layers:
   - Default
   - TransparentFX
