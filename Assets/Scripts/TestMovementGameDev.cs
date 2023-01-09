@@ -10,6 +10,7 @@ public class TestMovementGameDev : MonoBehaviour
     //public NavMeshAgent navMeshAgent;
 
     public CharacterController controller;
+    public Animator animator;
 
     public Transform playerSpawnPos;
     
@@ -57,6 +58,15 @@ public class TestMovementGameDev : MonoBehaviour
 
         if(Input.GetButtonDown("Jump") && isGrounded){
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        if(!Input.anyKey)
+        {
+            animator.SetBool("isRunning", false);
+        }
+        else if (controller.velocity.x > 0)
+        {
+            animator.SetBool("isRunning", true);
         }
 
         velocity.y += gravity * Time.deltaTime;
